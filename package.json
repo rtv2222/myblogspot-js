@@ -1,0 +1,10 @@
+{
+    "name": "user-micro-service",
+    "private": true,
+    "dependencies": {
+        "vertx3-full": "3.2.0"
+    },
+    "scripts": {
+        "start": "./node_modules/.bin/vertx run server.js"
+    }
+}
