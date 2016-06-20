@@ -12,7 +12,10 @@ EXPOSE 8080
 # Copy your verticle to the container       (4)
 COPY $VERTICLE_NAME $VERTICLE_HOME/
 
-# Launch the verticle                       (5)
+# Copy your verticle's dependencies       (5)
+COPY target/lib/vertx-auth-mongo-3.2.1.jar $VERTICLE_HOME/lib
+
+# Launch the verticle                       (6)
 WORKDIR $VERTICLE_HOME
 ENTRYPOINT ["sh", "-c"]
-CMD ["vertx run $VERTICLE_NAME -cp $VERTICLE_HOME/*"]
+CMD ["vertx run $VERTICLE_NAME -cp $VERTICLE_HOME/lib/vertx-auth-mongo-3.2.1.jar"]
