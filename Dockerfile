@@ -7,7 +7,7 @@ ENV VERTICLE_NAME server.js
 # Set the location of the verticles         (3)
 ENV VERTICLE_HOME /usr/verticles
 
-EXPOSE 8080
+EXPOSE 8123
 
 # Copy your verticle to the container       (4)
 COPY $VERTICLE_NAME $VERTICLE_HOME/
