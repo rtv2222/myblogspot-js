@@ -25,6 +25,12 @@ var MongoAuth = require("vertx-auth-mongo-js/mongo_auth"),
     },
     authProvider = MongoAuth.create(client, authProperties);
 
+var CONFIGURED_PORT = java.lang.System.getProperty("LISTEN_PORT");
+if (CONFIGURED_PORT != undefined && CONFIGURED_PORT != '') {
+    console.log("Starting verticle on port "+ CONFIGURED_PORT);
+    DEFAULT_HTTP_PORT = CONFIGURED_PORT;
+}
+
 //Remove salt for now thanks to broken JS Mongo Auth
 //https://groups.google.com/forum/?fromgroups#!topic/vertx/AfjHVJy4wtk
 authProvider.getHashStrategy().setSaltStyle("NO_SALT");
