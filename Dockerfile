@@ -18,4 +18,4 @@ COPY target/lib/vertx-auth-mongo-3.2.1.jar $VERTICLE_HOME
 # Launch the verticle                       (6)
 WORKDIR $VERTICLE_HOME
 ENTRYPOINT ["sh", "-c"]
-CMD ["vertx run $VERTICLE_NAME -cluster -cp $VERTICLE_HOME/vertx-auth-mongo-3.2.1.jar"]
+CMD ["vertx run $VERTICLE_NAME -cluster --net=host -cp $VERTICLE_HOME/vertx-auth-mongo-3.2.1.jar"]
