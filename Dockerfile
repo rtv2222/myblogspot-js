@@ -14,6 +14,7 @@ COPY $VERTICLE_NAME $VERTICLE_HOME/
 
 # Copy your verticle's dependencies       (5)
 COPY target/lib/vertx-auth-mongo-3.2.1.jar $VERTICLE_HOME
+COPY startup.sh /usr/local/bin
 
 # Launch the verticle                       (6)
 WORKDIR $VERTICLE_HOME
