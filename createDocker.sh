@@ -6,7 +6,9 @@ then
    echo "Currently used port is $value"
    value=$((value+1))
    echo $value > ./lastPort
-   echo "Invoking docker run with $value"
+   echo "HA-PROXY ENTRY============"
+   echo "server server2 10.78.106.176:$value maxconn 32"
+   echo "HA-PROXY ENTRY============"
    docker run -e LISTEN_PORT=$value --net=host rtv2222/user-service-js &
 else
    echo "Failed to build and deploy the docker container"
