@@ -19,4 +19,5 @@ COPY startup.sh /usr/local/bin
 # Launch the verticle                       (6)
 WORKDIR $VERTICLE_HOME
 ENTRYPOINT ["sh", "-c"]
-CMD ["vertx run $VERTICLE_NAME -cluster -cp $VERTICLE_HOME/vertx-auth-mongo-3.2.1.jar"]
+#CMD ["vertx run $VERTICLE_NAME -cluster -cp $VERTICLE_HOME/vertx-auth-mongo-3.2.1.jar"]
+CMD bash -C '/usr/local/bin/startup.sh';'bash'
