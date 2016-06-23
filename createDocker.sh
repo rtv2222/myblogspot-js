@@ -2,7 +2,8 @@
 docker build -t rtv2222/user-service-js .
 if [ $? = 0 ]
 then
-   docker run -i --net=host rtv2222/user-service-js &  
+   docker run -i --net=host rtv2222/user-service-js &
+   exit 0
 else
    echo "Failed to build and deploy the docker container"
    exit 1
