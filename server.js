@@ -109,12 +109,20 @@ router.post("/Services/rest/user/register").handler(function (ctx) {
                             USERNAME_FIELD: jsonRequest[USERNAME_FIELD]
                         };
 
+                        /*
+                         {userId: "id", userName: "name", firstName: "name", lastName: "name", companyId: "id", siteId: "id", deptId: "id"}
+                         */
+
                         // Set the author field
                         var update = {
                             "$set": {
                                 "company_id": eventRes.companyId,
                                 "dept_id": eventRes.deptId,
-                                "site_id": eventRes.siteId
+                                "site_id": eventRes.siteId,
+                                "first_name": jsonRequest[ "firstName"],
+                                "last_name": jsonRequest["lastName"],
+                                "username": jsonRequest["userName"],
+                                "email": jsonRequest["email"]
                             }
                         };
 
@@ -147,17 +155,21 @@ eventBus.consumer("com.cisco.cmad.user.authenticate", function (message) {
     else {
         client.find("user", userInfo, function (res, res_err) {
             if (res_err == null) {
-                var found = false;
+                var found = false,
+                    dbResp = undefined;
                 Array.prototype.forEach.call(res, function(json) {
                     if (userInfo[PASSWORD_FIELD] === json[PASSWORD_FIELD]) {
                         found = true;
-
+                        dbResp = json;
                     }
                 });
                 if (found) {
                     var responseEv = {};
                     responseEv[USERNAME_FIELD] = userInfo.username;
-                    responseEv[PASSWORD_FIELD] = userInfo.password;
+                    responseEv["firstName"] = dbResp["first_name"];
+                    responseEv["lastName"] = dbResp["last_name"];
+                    responseEv["email"] = dbResp["email"];
+                    responseEv["userName"] = dbResp["username"];
                     console.log("responding with message: " + JSON.stringify(responseEv));
                     message.reply(responseEv);
                     return;
