@@ -2,7 +2,7 @@
 docker build -t rtv2222/user-service-js .
 if [ $? = 0 ]
 then
-   value=`cat /usr/local/etc/lastPort`
+   value=`cat ./lastPort`
    echo "Currently used port is $value"
    value=$((value+1))
    echo $value > ./lastPort
