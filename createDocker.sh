@@ -3,6 +3,7 @@ docker build -t rtv2222/user-service-js .
 if [ $? = 0 ]
 then
    value=`cat ./lastPort`
+   echo "GO counter: $GO_PIPELINE_COUNTER"
    echo "Currently used port is $value"
    value=$((value+1))
    echo $value > ./lastPort
