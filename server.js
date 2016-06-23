@@ -26,6 +26,7 @@ var MongoAuth = require("vertx-auth-mongo-js/mongo_auth"),
     authProvider = MongoAuth.create(client, authProperties);
 
 var CONFIGURED_PORT = java.lang.System.getProperty("LISTEN_PORT");
+    console.log("Configured port is : "+ CONFIGURED_PORT);
 if (CONFIGURED_PORT != undefined && CONFIGURED_PORT != '') {
     console.log("Starting verticle on port "+ CONFIGURED_PORT);
     DEFAULT_HTTP_PORT = CONFIGURED_PORT;
