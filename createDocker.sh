@@ -2,11 +2,7 @@
 docker build -t rtv2222/user-service-js .
 if [ $? = 0 ]
 then
-   value=`cat ./lastPort`
-   echo "GO counter: $GO_PIPELINE_COUNTER"
-   echo "Currently used port is $value"
-   value=$((value+1))
-   echo $value > ./lastPort
+   value=$((8000+$GO_PIPELINE_COUNTER))
    echo "HA-PROXY ENTRY============"
    echo "server server2 10.78.106.176:$value maxconn 32"
    echo "HA-PROXY ENTRY============"
