@@ -29,7 +29,7 @@ var CONFIGURED_PORT = java.lang.System.getProperty("LISTEN_PORT");
     console.log("Configured port is : "+ CONFIGURED_PORT);
 if (CONFIGURED_PORT != undefined && CONFIGURED_PORT != '') {
     console.log("Starting verticle on port "+ CONFIGURED_PORT);
-    DEFAULT_HTTP_PORT = CONFIGURED_PORT;
+    DEFAULT_HTTP_PORT = parseInt(CONFIGURED_PORT, 10);
 }
 
 //Remove salt for now thanks to broken JS Mongo Auth
