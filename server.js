@@ -156,6 +156,7 @@ eventBus.consumer("com.cisco.cmad.user.authenticate", function (message) {
     var userInfo = {};
     userInfo.username = message.body()[USERNAME_FIELD];
     userInfo.password = message.body()[PASSWORD_FIELD];
+    console.log("Authentication requested for user: " + JSON.stringify(message));
 
     if (!isValidUser(message.body())) {
         message.reply({errorCode: -2, errorMessage: "Authentication failed"});
@@ -165,7 +166,9 @@ eventBus.consumer("com.cisco.cmad.user.authenticate", function (message) {
             if (res_err == null) {
                 var found = false,
                     dbResp = undefined;
+                console.log("Iterating over entries");
                 Array.prototype.forEach.call(res, function(json) {
+                    console.log("Checking with :" + JSON.stringify(json));
                     if (userInfo[PASSWORD_FIELD] === json[PASSWORD_FIELD]) {
                         found = true;
                         dbResp = json;
