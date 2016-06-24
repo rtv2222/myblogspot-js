@@ -110,12 +110,9 @@ router.post("/Services/rest/user/register").handler(function (ctx) {
                 { companyName: jsonRequest[COMPANY_FIELD], deptName: jsonRequest[DEPT_FIELD], siteName: jsonRequest[SITE_FIELD], subDomain: jsonRequest[SUBDOMAIN_FIELD] },
                 function (ar, ar_err) {
                     if (ar_err == null) {
-                        console.log("Received reply: " + ar.body());
+                        console.log("Received reply: " + JSON.stringify(ar.body()));
                         var eventRes = ar.body();
-                        var query = {
-                            USERNAME_FIELD: jsonRequest[USERNAME_FIELD]
-                        };
-
+                        var query = {username: jsonRequest[USERNAME_FIELD]};
                         /*
                          {userId: "id", userName: "name", firstName: "name", lastName: "name", companyId: "id", siteId: "id", deptId: "id"}
                          */
@@ -133,8 +130,10 @@ router.post("/Services/rest/user/register").handler(function (ctx) {
                             }
                         };
 
-                        client.update("users_collection", query, update, function (res, res_err) {
+                        console.log("User query: " + JSON.stringify(query));
+                        client.update("user", query, update, function (res, res_err) {
                             if (res_err == null) {
+                                console.log("Received reply: " + JSON.stringify(res));
                                 // Write to the response and end it
                                 response.setStatusCode(201).end();
                             } else {
