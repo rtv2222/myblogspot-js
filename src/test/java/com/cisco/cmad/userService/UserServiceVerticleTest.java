@@ -120,7 +120,7 @@ public class UserServiceVerticleTest {
   public void testCreateNewUserAndAuthenticate(TestContext context) {
     final Async async = context.async();
     EventBus eventBus = vertx.eventBus();
-    final JsonObject someUser = new JsonObject("{\"userName\":\"someuser\", \"username\": \"oneuser\", \"password\":\"passwd\",\"firstName\":\"name\", \"lastName\":\"name\"}");
+    final JsonObject someUser = new JsonObject("{\"userName\":\"bhanush\", \"username\": \"oneuser\", \"password\":\"passwd\",\"firstName\":\"name\", \"lastName\":\"name\"}");
     
     //Create mock event response for dept verticle
     MessageConsumer<String> consumer = eventBus.consumer("com.cisco.cmad.register.company");

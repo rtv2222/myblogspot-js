@@ -104,6 +104,7 @@ router.post("/Services/rest/user/register").handler(function (ctx) {
         response.setStatusCode(400);
     }
 
+    console.log("Payload to register the user: " + JSON.stringify(jsonRequest));
     authProvider.insertUser(jsonRequest[USERNAME_FIELD], jsonRequest[PASSWORD_FIELD], [], [], function(mongoRes, err) {
         if (mongoRes) {
             eventBus.send("com.cisco.cmad.register.company",
@@ -111,6 +112,7 @@ router.post("/Services/rest/user/register").handler(function (ctx) {
                 function (ar, ar_err) {
                     if (ar_err == null) {
                         console.log("Received reply: " + JSON.stringify(ar.body()));
+                        console.log("Constructing user query : " + JSON.stringify(jsonRequest));
                         var eventRes = ar.body();
                         var query = {username: jsonRequest[USERNAME_FIELD]};
                         /*
